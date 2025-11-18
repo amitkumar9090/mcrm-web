@@ -113,14 +113,14 @@ export default function Header() {
           {/* Minimize */}
           <div className="header-line" />
           {/* message */}
-          <div className="header-item">
+          {/* <div className="header-item">
             <div className="dropdown me-2">
               <a href="cha" className="btn topbar-link">
                 <i className="ti ti-message-circle-exclamation" />
                 <span className="badge rounded-pill">14</span>
               </a>
             </div>
-          </div>
+          </div> */}
           {/* Notification Dropdown */}
           <div className="header-item">
             <div className="dropdown me-2">
@@ -543,9 +543,27 @@ export default function Header() {
                 </Link>
               </li>
               <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Create Users</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/dashboard/roles-permissions">
                   <i className="ti ti-user-shield" />
                   <span>Roles &amp; Permissions</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>KYC Approvals</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Login History</span>
                 </Link>
               </li>
               <li>
@@ -557,10 +575,588 @@ export default function Header() {
             </ul>
           </li>
           <li className="menu-title">
+            <span>Admins</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Admin List</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Add New Admin</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Admin Permissions</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Admin Activity Logs</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Sellers Management</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Sellers List</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Add New Seller</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Seller Approval Requests</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>KYC Verification</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Seller Payout Settings</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Suspended Sellers</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Seller Activity Logs</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Seller Documents</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Seller Commission</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Seller Store</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Store Info</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Store Branding</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Store Badges</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Store Rating Reports</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Store-level Discounts</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Promotion Management</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Store SEO Settings</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Store Withdrawal Requests</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Store Shipping Settings</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Store Tax Settings</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Products Module</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>All Products</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Active Products</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Pending Approval</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Rejected Products</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Draft Products</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Disabled Products</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Deleted Products (Trash)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Product Reviews</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Product Images Audit</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Product History</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Inventory</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Inventory List</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Low Stock Items</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Out of Stock</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Bulk Stock Import</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Inventory Logs</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Stock Transfer</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Damaged Goods</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Restocking Needs</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Category Management</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Categories</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Sub-Categories</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Attributes</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Variants</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Attribute Sets</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Category SEO</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Category Images</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Category Sorting</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Orders Management</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>All Orders</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Pending Orders</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Processing</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Shipped</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Delivered</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Cancelled</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Returned</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Refunded</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>COD Orders</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/roles-permissions">
+                  <i className="ti ti-user-shield" />
+                  <span>Failed Orders</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Order Tools</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Invoice Generator</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Payments</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>All Transactions</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Payment Gateway Settings</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Failed Payments</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Refund Approvals</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Payouts</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Seller Payouts</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Salesperson Payouts</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Payout Batches</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Payout Rules</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Pending Payouts</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Completed Payouts</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Rejected Payouts</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Payout Export</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Bank Verification</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Commission</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Commission Rules</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Product-level Commission</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Pending Commission</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Approved Commission</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Paid Commission</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
+            <span>Marketing & Promotions</span>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <Link href="/dashboard/manage-users">
+                  <i className="ti ti-users" />
+                  <span>Coupons</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="menu-title">
             <span>Membership</span>
           </li>
           <li>
             <ul>
+                  <li>
+                    <Link href="/dashboard/membership/membership-plans">
+                      <i className="ti ti-brand-apple-podcast" />
+                      <span>Membership Plans</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/dashboard/membership/membership-addons">
+                      <i className="ti ti-brand-apple-podcast" />
+                      <span>Membership Addons</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/dashboard/membership/membership-transactions">
+                      <i className="ti ti-brand-apple-podcast" />
+                      <span>Transactions</span>
+                    </Link>
+                  </li>
+                </ul>
+            {/* <ul>
               <li className="submenu">
                 <a href="javascript:void(0);">
                   <i className="ti ti-brand-apple-podcast" />
@@ -579,7 +1175,7 @@ export default function Header() {
                   </li>
                 </ul>
               </li>
-            </ul>
+            </ul> */}
           </li>
           <li className="menu-title">
             <span>Support</span>

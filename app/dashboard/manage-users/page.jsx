@@ -240,8 +240,9 @@ const handleFetchUser = async (userId) => {
     setLoading(true);
     try {
       const userData = await getUserById(userId, token);
-      setUserDetails(userData.user);
-      console.log("Fetched user singel data :", userData.user);
+      console.log(userData);
+      setUserDetails(userData.data);
+      console.log("Fetched user singel data :", userData);
       setError(null);
     } catch (err) {
       setError(err.message);
@@ -821,7 +822,7 @@ const handleFetchUser = async (userId) => {
                             />
                           </div>
                         </th>
-                        <th className="no-sort" />
+                        {/* <th className="no-sort" /> */}
                         <th>Name</th>
                         <th>Email</th>
                         <th>Created</th>
@@ -854,11 +855,11 @@ const handleFetchUser = async (userId) => {
                             </td>
 
                             {/* Star/Favorite */}
-                            <td>
+                            {/* <td>
                               <div className="set-star rating-select">
                                 <i className="ti ti-star fs-16" />
                               </div>
-                            </td>
+                            </td> */}
 
                             {/* Name with Avatar */}
                             <td>

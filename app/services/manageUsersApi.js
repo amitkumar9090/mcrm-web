@@ -58,7 +58,7 @@ export const getUsers = async (token = null) => {
 // Get single user by ID
 export const getUserById = async (userId, token = null) => {
   try {
-    const response = await api.get(`/users/${userId}`, {
+    const response = await api.get(`/userdetails/${userId}`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     });
     return response.data;
