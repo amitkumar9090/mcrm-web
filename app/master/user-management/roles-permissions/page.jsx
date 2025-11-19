@@ -4,8 +4,9 @@ import React, { useState, useMemo, useEffect } from "react";
 import "./roles-permissions.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getRoles, createRole } from "../../services/roles&PermissionsApi";
-import { isAuthenticated } from "../../utils/auth";
+import { getRoles, createRole } from "../../../services/roles&PermissionsApi";
+// import { isAuthenticated } from "@/app/utils/auth";
+import { isAuthenticated } from "../../../utils/auth";
 
 export default function RolesPermissions() {
   const router = useRouter();

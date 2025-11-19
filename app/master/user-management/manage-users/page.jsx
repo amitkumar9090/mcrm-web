@@ -7,8 +7,8 @@ import {
   addUsers,
   getUserById,
   deleteUser,
-} from "../../services/manageUsersApi";
-import { isAuthenticated } from "../../utils/auth";
+} from "../../../services/manageUsersApi";
+import { isAuthenticated } from "../../../utils/auth";
 
 
 export default function ManageUsers() {

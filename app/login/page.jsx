@@ -10,7 +10,7 @@ export default function LoginPage() {
   useEffect(() => {
     // If user is already logged in, redirect to dashboard
     if (isAuthenticated()) {
-      router.replace("/dashboard");
+      router.replace("/master");
     }
   }, [router]);
 
