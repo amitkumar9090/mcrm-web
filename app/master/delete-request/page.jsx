@@ -170,7 +170,6 @@ export default function DeleteRequest() {
           <div className="card-header d-flex align-items-center justify-content-between gap-2 flex-wrap">
             <div className="input-icon input-icon-start position-relative">
               <span className="input-icon-addon text-dark">
-               
               </span>
               <input
                 type="text"

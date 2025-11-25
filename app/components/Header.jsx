@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; // <-- import useRouter
+import { useRouter, usePathname } from "next/navigation"; // <-- import useRouter and usePathname
 import Link from "next/link";
 import { logout } from "../services/api";
 import { isAuthenticated } from "../utils/auth";
@@ -8,6 +8,15 @@ import { isAuthenticated } from "../utils/auth";
 export default function Header() {
   const router = useRouter();
   const [token, setToken] = useState("");
+  const pathname = usePathname();
+
+  const normalize = (p) => (p ? p.replace(/\/+$|^\s+|\s+$/g, "") : "");
+
+  const checkActive = (href) => {
+    const np = normalize(pathname || "");
+    const nh = normalize(href || "");
+    return np === nh || (nh && np.startsWith(nh + "/"));
+  };
 
   useEffect(() => {
     // Check authentication and get token
@@ -506,7 +515,7 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li className="active">
+                  <li className={checkActive("/master") ? "active" : ""}>
                     <Link href="/master">
                       <i className="ti ti-user-star" />
                       <span>master</span>
@@ -556,37 +565,71 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/user-management/manage-users")
+                        ? "active"
+                        : ""
+                    }
+                  >
                     <Link href="/master/user-management/manage-users">
                       <i className="ti ti-users" />
                       <span>Manage Users</span>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/user-management/create-users")
+                        ? "active"
+                        : ""
+                    }
+                  >
                     <Link href="/master/user-management/create-users">
                       <i className="ti ti-users" />
                       <span>Create Users</span>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/user-management/roles-permissions")
+                        ? "active"
+                        : ""
+                    }
+                  >
                     <Link href="/master/user-management/roles-permissions">
                       <i className="ti ti-user-shield" />
                       <span>Roles &amp; Permissions</span>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/user-management/kyc-approvals")
+                        ? "active"
+                        : ""
+                    }
+                  >
                     <Link href="/master/user-management/kyc-approvals">
                       <i className="ti ti-users" />
                       <span>KYC Approvals</span>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/user-management/login-history")
+                        ? "active"
+                        : ""
+                    }
+                  >
                     <Link href="/master/user-management/login-history">
                       <i className="ti ti-users" />
                       <span>Login History</span>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/delete-request") ? "active" : ""
+                    }
+                  >
                     <Link href="/master/delete-request">
                       <i className="ti ti-flag-question" />
                       <span>Delete Request</span>
@@ -599,26 +642,37 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/admins/admin-list") ? "active" : ""
+                    }
+                  >
                     <Link href="/master/admins/admin-list">
                       <i className="ti ti-users" />
                       <span>Admin List</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/admins/add-new-admin")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/admins/add-new-admin">
                       <i className="ti ti-users" />
                       <span>Add New Admin</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
-                      <i className="ti ti-users" />
-                      <span>Admin Permissions</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                
+                  <li
+                    className={
+                      checkActive("/master/admins/admin-activity-logs")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/admins/admin-activity-logs">
                       <i className="ti ti-user-shield" />
                       <span>Admin Activity Logs</span>
                     </Link>
@@ -630,60 +684,57 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/sellers-management/sellers-list")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/sellers-management/sellers-list">
                       <i className="ti ti-users" />
                       <span>Sellers List</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/sellers-management/add-new-seller")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/sellers-management/add-new-seller">
                       <i className="ti ti-users" />
                       <span>Add New Seller</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive(
+                        "/master/sellers-management/seller-approval-requests"
+                      )
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/sellers-management/seller-approval-requests">
                       <i className="ti ti-users" />
                       <span>Seller Approval Requests</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/sellers-management/kyc-verification")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/sellers-management/kyc-verification">
                       <i className="ti ti-user-shield" />
                       <span>KYC Verification</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Seller Payout Settings</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Suspended Sellers</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Seller Activity Logs</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Seller Documents</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Seller Commission</span>
-                    </Link>
-                  </li>
+                 
                 </ul>
               </li>
               <li className="menu-title">
@@ -691,62 +742,54 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/seller-store/store-info")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/seller-store/store-info">
                       <i className="ti ti-users" />
-                      <span>Store Info</span>
+                      <span>Store List</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/seller-store/store-branding")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/seller-store/store-branding">
                       <i className="ti ti-users" />
-                      <span>Store Branding</span>
+                      <span>Add New Store </span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
-                      <i className="ti ti-users" />
-                      <span>Store Badges</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Store Rating Reports</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Store-level Discounts</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Promotion Management</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Store SEO Settings</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                 
+                  <li
+                    className={
+                      checkActive(
+                        "/master/seller-store/store-withdrawal-request"
+                      )
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/seller-store/store-withdrawal-request">
                       <i className="ti ti-user-shield" />
                       <span>Store Withdrawal Requests</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Store Shipping Settings</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                
+                  <li
+                    className={
+                      checkActive("/master/seller-store/store-tax-settings")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/seller-store/store-tax-settings">
                       <i className="ti ti-user-shield" />
                       <span>Store Tax Settings</span>
                     </Link>
@@ -758,64 +801,102 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/product-module/all-products")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/product-module/all-products">
                       <i className="ti ti-users" />
                       <span>All Products</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/product-module/active-products")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/product-module/active-products">
                       <i className="ti ti-users" />
                       <span>Active Products</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/product-module/pending-approval")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/product-module/pending-approval">
                       <i className="ti ti-users" />
                       <span>Pending Approval</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/product-module/rejected-products")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/product-module/rejected-products">
                       <i className="ti ti-user-shield" />
                       <span>Rejected Products</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/product-module/draft-products")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/product-module/draft-products">
                       <i className="ti ti-user-shield" />
                       <span>Draft Products</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/product-module/disabled-products")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/product-module/disabled-products">
                       <i className="ti ti-user-shield" />
                       <span>Disabled Products</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive(
+                        "/master/product-module/deleted-product(trash)"
+                      )
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/product-module/deleted-product(trash)">
                       <i className="ti ti-user-shield" />
                       <span>Deleted Products (Trash)</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/product-module/product-reviews")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/product-module/product-reviews">
                       <i className="ti ti-user-shield" />
                       <span>Product Reviews</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Product Images Audit</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
-                      <i className="ti ti-user-shield" />
-                      <span>Product History</span>
                     </Link>
                   </li>
                 </ul>
@@ -825,50 +906,98 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/inventory/inventory-list")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/inventory/inventory-list">
                       <i className="ti ti-users" />
                       <span>Inventory List</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/inventory/low-stock-items")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/inventory/low-stock-items">
                       <i className="ti ti-users" />
                       <span>Low Stock Items</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/inventory/out-of-stock")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/inventory/out-of-stock">
                       <i className="ti ti-users" />
                       <span>Out of Stock</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/inventory/bulk-stock-import")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/inventory/bulk-stock-import">
                       <i className="ti ti-user-shield" />
                       <span>Bulk Stock Import</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/inventory/inventory-logs")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/inventory/inventory-logs">
                       <i className="ti ti-user-shield" />
                       <span>Inventory Logs</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/inventory/stock-transfer")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/inventory/stock-transfer">
                       <i className="ti ti-user-shield" />
                       <span>Stock Transfer</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/inventory/damaged-goods")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/inventory/damaged-goods">
                       <i className="ti ti-user-shield" />
                       <span>Damaged Goods</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/inventory/restocking-needs")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/inventory/restocking-needs">
                       <i className="ti ti-user-shield" />
                       <span>Restocking Needs</span>
                     </Link>
@@ -880,50 +1009,100 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/category-management/categories")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/category-management/categories">
                       <i className="ti ti-users" />
                       <span>Categories</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/category-management/sub-categories")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/category-management/sub-categories">
                       <i className="ti ti-users" />
                       <span>Sub-Categories</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/category-management/attributes")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/category-management/attributes">
                       <i className="ti ti-users" />
                       <span>Attributes</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/category-management/variants")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/category-management/variants">
                       <i className="ti ti-user-shield" />
                       <span>Variants</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/category-management/attributes-sets")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/category-management/attributes-sets">
                       <i className="ti ti-user-shield" />
                       <span>Attribute Sets</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/category-management/category-seo")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/category-management/category-seo">
                       <i className="ti ti-user-shield" />
                       <span>Category SEO</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/category-management/category-images")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/category-management/category-images">
                       <i className="ti ti-user-shield" />
                       <span>Category Images</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive(
+                        "/master/category-management/category-sorting"
+                      )
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/category-management/category-sorting">
                       <i className="ti ti-user-shield" />
                       <span>Category Sorting</span>
                     </Link>
@@ -935,62 +1114,122 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/order-management/all-orders")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/all-orders">
                       <i className="ti ti-users" />
                       <span>All Orders</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/order-management/pending-orders")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/pending-orders">
                       <i className="ti ti-users" />
                       <span>Pending Orders</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/order-management/processing")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/processing">
                       <i className="ti ti-users" />
                       <span>Processing</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/order-management/shipped")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/shipped">
                       <i className="ti ti-user-shield" />
                       <span>Shipped</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/order-management/delivered")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/delivered">
                       <i className="ti ti-user-shield" />
                       <span>Delivered</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/order-management/cancelled")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/cancelled">
                       <i className="ti ti-user-shield" />
                       <span>Cancelled</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/order-management/returned")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/returned">
                       <i className="ti ti-user-shield" />
                       <span>Returned</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/order-management/refunded")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/refunded">
                       <i className="ti ti-user-shield" />
                       <span>Refunded</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/order-management/cod-orders")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/cod-orders">
                       <i className="ti ti-user-shield" />
                       <span>COD Orders</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/roles-permissions">
+                  <li
+                    className={
+                      checkActive("/master/order-management/failed-orders")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-management/failed-orders">
                       <i className="ti ti-user-shield" />
                       <span>Failed Orders</span>
                     </Link>
@@ -1002,8 +1241,14 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/order-tools/invoice-generator")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/order-tools/invoice-generator">
                       <i className="ti ti-users" />
                       <span>Invoice Generator</span>
                     </Link>
@@ -1015,26 +1260,50 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payments/all-transaction")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/payments/all-transaction">
                       <i className="ti ti-users" />
                       <span>All Transactions</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payments/payment-gateway-setting")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/payments/payment-gateway-setting">
                       <i className="ti ti-users" />
                       <span>Payment Gateway Settings</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payments/failed-payments")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/payments/failed-payments">
                       <i className="ti ti-users" />
                       <span>Failed Payments</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payments/refund-approvals")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/payments/refund-approvals">
                       <i className="ti ti-users" />
                       <span>Refund Approvals</span>
                     </Link>
@@ -1046,56 +1315,92 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/manage-users") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/seller-payouts">
                       <i className="ti ti-users" />
                       <span>Seller Payouts</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payouts/salesperson-payouts") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/salesperson-payouts">
                       <i className="ti ti-users" />
                       <span>Salesperson Payouts</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payouts/payout-batches") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/payout-batches">
                       <i className="ti ti-users" />
                       <span>Payout Batches</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payouts/payout-rules") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/payout-rules">
                       <i className="ti ti-users" />
                       <span>Payout Rules</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payouts/pending-payouts") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/pending-payouts">
                       <i className="ti ti-users" />
                       <span>Pending Payouts</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payouts/completed-payouts") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/completed-payouts">
                       <i className="ti ti-users" />
                       <span>Completed Payouts</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payouts/rejected-payouts") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/rejected-payouts">
                       <i className="ti ti-users" />
                       <span>Rejected Payouts</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payouts/payout-export") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/payout-export">
                       <i className="ti ti-users" />
                       <span>Payout Export</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/payouts/bank-verification") ? "active" : ""
+                    }
+                  >
+                    <Link href="/master/payouts/bank-verification">
                       <i className="ti ti-users" />
                       <span>Bank Verification</span>
                     </Link>
@@ -1107,32 +1412,62 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/commission/commisions-rules")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/commission/commisions-rules">
                       <i className="ti ti-users" />
                       <span>Commission Rules</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/commission/product-level-commission")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/commission/product-level-commission">
                       <i className="ti ti-users" />
                       <span>Product-level Commission</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/commission/pending-commission")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/commission/pending-commission">
                       <i className="ti ti-users" />
                       <span>Pending Commission</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/commission/approved-commission")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/commission/approved-commission">
                       <i className="ti ti-users" />
                       <span>Approved Commission</span>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/commission/paid-commission")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/commission/paid-commission">
                       <i className="ti ti-users" />
                       <span>Paid Commission</span>
                     </Link>
@@ -1144,8 +1479,14 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
-                    <Link href="/master/manage-users">
+                  <li
+                    className={
+                      checkActive("/master/marketing-promotions/coupons")
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <Link href="/master/marketing-promotions/coupons">
                       <i className="ti ti-users" />
                       <span>Coupons</span>
                     </Link>
@@ -1157,19 +1498,37 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/membership/membership-plans")
+                        ? "active"
+                        : ""
+                    }
+                  >
                     <Link href="/master/membership/membership-plans">
                       <i className="ti ti-brand-apple-podcast" />
                       <span>Membership Plans</span>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/membership/membership-addons")
+                        ? "active"
+                        : ""
+                    }
+                  >
                     <Link href="/master/membership/membership-addons">
                       <i className="ti ti-brand-apple-podcast" />
                       <span>Membership Addons</span>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/membership/membership-transactions")
+                        ? "active"
+                        : ""
+                    }
+                  >
                     <Link href="/master/membership/membership-transactions">
                       <i className="ti ti-brand-apple-podcast" />
                       <span>Transactions</span>
@@ -1202,13 +1561,21 @@ export default function Header() {
               </li>
               <li>
                 <ul>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/contact-messages") ? "active" : ""
+                    }
+                  >
                     <Link href="/master/contact-messages">
                       <i className="ti ti-message-check" />
                       <span>Contact Messages</span>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    className={
+                      checkActive("/master/contact-messages") ? "active" : ""
+                    }
+                  >
                     <Link href="/master/contact-messages">
                       <i className="ti ti-message-check" />
                       <span>All Messages</span>
@@ -1234,13 +1601,31 @@ export default function Header() {
                       <span className="menu-arrow" />
                     </a>
                     <ul>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/profile-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/profile-settings">Profile</Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/security-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/security-settings">Security</Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/notifications-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/notifications-settings">
                           Notifications
                         </Link>
@@ -1254,30 +1639,66 @@ export default function Header() {
                       <span className="menu-arrow" />
                     </a>
                     <ul>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/company-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/company-settings">
                           Company Settings
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/localization-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/localization-settings">
                           Localization
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/prefixes-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/prefixes-settings">Prefixes</Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/preference-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/preference-settings">
                           Preference
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/appearance-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/appearance-settings">
                           Appearance
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/language-settings")
+                            ? "active"
+                            : ""
+                        }
+                      >
                         <Link href="/master/language-settings">Language</Link>
                       </li>
                     </ul>
@@ -1290,15 +1711,27 @@ export default function Header() {
                       <span className="menu-arrow" />
                     </a>
                     <ul>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/email-settings") ? "active" : ""
+                        }
+                      >
                         <Link href="/master/email-settings">
                           Email Settings
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/sms-gateways") ? "active" : ""
+                        }
+                      >
                         <Link href="/master/sms-gateways">SMS Gateways</Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/gdpr-cookies") ? "active" : ""
+                        }
+                      >
                         <Link href="/master/gdpr-cookies">GDPR Cookies</Link>
                       </li>
                     </ul>
@@ -1310,18 +1743,34 @@ export default function Header() {
                       <span className="menu-arrow" />
                     </a>
                     <ul>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/payment-gateway") ? "active" : ""
+                        }
+                      >
                         <Link href="/master/payment-gateway">
                           Payment Gateways
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/bank-account") ? "active" : ""
+                        }
+                      >
                         <Link href="/master/bank-account">Bank Accounts</Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/tax-rate") ? "active" : ""
+                        }
+                      >
                         <Link href="/master/tax-rate">Tax Rates</Link>
                       </li>
-                      <li>
+                      <li
+                        className={
+                          checkActive("/master/currencie") ? "active" : ""
+                        }
+                      >
                         <Link href="/master/currencie">Currencies</Link>
                       </li>
                     </ul>

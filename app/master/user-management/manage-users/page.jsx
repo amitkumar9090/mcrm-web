@@ -10,17 +10,16 @@ import {
 } from "../../../services/manageUsersApi";
 import { isAuthenticated } from "../../../utils/auth";
 
-
 export default function ManageUsers() {
-
   const router = useRouter();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState("");
   const [roles, setRoles] = useState([]);
   const [role, setRole] = useState("");
-const [userDetails, setUserDetails] = useState({});
-
+  const [userDetails, setUserDetails] = useState({});
+  // Search state for filtering users
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Form state
   const [formData, setFormData] = useState({
@@ -37,7 +36,7 @@ const [userDetails, setUserDetails] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
-   const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const checkAuthAndFetchUsers = async () => {
@@ -84,6 +83,11 @@ const [userDetails, setUserDetails] = useState({});
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   // Handle file upload
@@ -201,6 +205,23 @@ const [userDetails, setUserDetails] = useState({});
     }
     return name.charAt(0);
   };
+  // Filter users client-side based on search query (name, email, phone, role)
+  const filteredUsers = users.filter((user) => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return true;
+    const name = (user.name || "").toLowerCase();
+    const email = (user.email || "").toLowerCase();
+    const phone = (user.phone || "").toLowerCase();
+    const roleName = (
+      user.roles && user.roles.length > 0 ? user.roles[0].name : ""
+    ).toLowerCase();
+    return (
+      name.includes(q) ||
+      email.includes(q) ||
+      phone.includes(q) ||
+      roleName.includes(q)
+    );
+  });
   // Add state to store the user ID to delete
   const [userToDelete, setUserToDelete] = useState(null);
 
@@ -213,8 +234,6 @@ const [userDetails, setUserDetails] = useState({});
     );
     modal.show();
   };
-
-
 
   // // Option 1: Fetch user on component mount
   // useEffect(() => {
@@ -235,8 +254,7 @@ const [userDetails, setUserDetails] = useState({});
   //   fetchUser();
   // }, []); // Empty dependency array means run once on mount
 
-
-const handleFetchUser = async (userId) => {
+  const handleFetchUser = async (userId) => {
     setLoading(true);
     try {
       const userData = await getUserById(userId, token);
@@ -246,12 +264,12 @@ const handleFetchUser = async (userId) => {
       setError(null);
     } catch (err) {
       setError(err.message);
-      
+
       // Handle different error types
-      if (err.type === 'network_error') {
-        alert('Network error! Please check your connection.');
+      if (err.type === "network_error") {
+        alert("Network error! Please check your connection.");
       } else if (err.status === 404) {
-        alert('User not found!');
+        alert("User not found!");
       } else {
         alert(`Error: ${err.message}`);
       }
@@ -282,7 +300,9 @@ const handleFetchUser = async (userId) => {
           <div>
             <h4 className="mb-1">
               Manage Users
-              <span className="badge badge-soft-primary ms-2">{users.length}</span>
+              <span className="badge badge-soft-primary ms-2">
+                {filteredUsers.length}
+              </span>
             </h4>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb mb-0 p-0">
@@ -356,17 +376,10 @@ const handleFetchUser = async (userId) => {
                 type="text"
                 className="form-control"
                 placeholder="Search"
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
             </div>
-            <a
-              href="javascript:void(0);"
-              className="btn btn-primary"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvas_add"
-            >
-              <i className="ti ti-square-rounded-plus-filled me-1" />
-              Add User
-            </a>
           </div>
 
           {/* Card Body */}
@@ -832,7 +845,7 @@ const handleFetchUser = async (userId) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {users.length === 0 ? (
+                      {filteredUsers.length === 0 ? (
                         <tr>
                           <td colSpan="8" className="text-center py-4">
                             <div className="text-muted">
@@ -842,7 +855,7 @@ const handleFetchUser = async (userId) => {
                           </td>
                         </tr>
                       ) : (
-                        users.map((user, index) => (
+                        filteredUsers.map((user, index) => (
                           <tr key={user.id || index}>
                             {/* Checkbox */}
                             <td>
@@ -883,7 +896,9 @@ const handleFetchUser = async (userId) => {
                                 >
                                   {user.name || "N/A"}
                                   <span className="text-body fs-13 mt-1 d-inline-block fw-normal">
-                                    {(user.roles.length > 0 ? user.roles[0].name : '') || "User"}
+                                    {(user.roles.length > 0
+                                      ? user.roles[0].name
+                                      : "") || "User"}
                                   </span>
                                 </a>
                               </h6>
@@ -965,8 +980,8 @@ const handleFetchUser = async (userId) => {
                   <div className="row align-items-center mt-3">
                     <div className="col-md-6">
                       <div className="datatable-length">
-                        Showing {users.length}{" "}
-                        {users.length === 1 ? "entry" : "entries"}
+                        Showing {filteredUsers.length}{" "}
+                        {filteredUsers.length === 1 ? "entry" : "entries"}
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -1442,7 +1457,7 @@ const handleFetchUser = async (userId) => {
       </div>
       {/* /Edit User */}
       {/* delete modal */}
-  
+
       <div className="modal fade" id="delete_contact">
         <div className="modal-dialog modal-dialog-centered modal-sm rounded-0">
           <div className="modal-content rounded-0">

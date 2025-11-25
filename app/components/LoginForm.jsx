@@ -21,11 +21,15 @@ export default function LoginForm() {
       // router.push("/dashboard");
     try {
       const data = await login(email, password);
-      console.log("Login success:", data);
+      console.log("Login success:", data?.user?.roles[0]?.slug);
 
       if (data.access_token) {
         localStorage.setItem("token", data.access_token);
-        router.push("/dashboard");
+        if(data?.user?.roles[0]?.slug === 'admin'){
+          router.push("/master");
+        } else if(data?.user?.roles[0]?.slug === 'seller'){
+          router.push("/seller");
+        }
       } else {
         throw new Error("Token not found in response");
       }
